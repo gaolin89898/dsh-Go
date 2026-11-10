@@ -155,6 +155,7 @@ void main() {
       reason: 'installed local runtime must expose index rescue without DSH RPC',
     );
     await tester.ensureVisible(find.byKey(_tile));
+    await tester.pumpAndSettle();
     await tester.tap(find.byKey(_tile));
     await tester.pumpAndSettle();
     expect(find.byType(AlertDialog), findsOneWidget);

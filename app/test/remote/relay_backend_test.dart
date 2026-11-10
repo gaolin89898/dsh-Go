@@ -105,7 +105,7 @@ void main() {
       expect(backend.approves('mac', '3F2A 9C41 07BE'), isTrue);
       expect(backend.approves('mac', '0000 0000 0000'), isFalse, reason: 'key swapped after the prompt');
       expect(backend.approves('mac', null), isFalse);
-      expect(backend.serverLabel, 'dsh.r2049.cn');
+      expect(backend.serverLabel, 'remote.gaolin.ink');
     });
   });
 

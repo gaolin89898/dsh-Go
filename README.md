@@ -174,7 +174,7 @@
 DSH Go 提供聊天界面、本机运行环境和远程连接，是基于 [DeepSeek Harness](https://github.com/deepseek-ai/deepseek-harness) 的第三方项目。运行在手机上的是 DSH 引擎；模型请求仍由你配置的模型提供方处理。
 
 - **本机运行**：在 App 内安装 Ubuntu、Node.js 与 DSH 运行环境，无需 Root 或另装 Termux。
-- **远程连接**：通过 SSH 或李国宝老师开发的 [DSHarness Remote](https://github.com/liguobao/ds-harness-remote) 使用电脑、服务器上的 DSH。
+- **远程连接**：通过 SSH 或 [DSHarness Remote（gaolin89898 fork）](https://github.com/gaolin89898/ds-harness-remote) 使用电脑、服务器上的 DSH，默认服务为 `https://remote.gaolin.ink`。
 - **聊天与工具**：切换模型，发送图片、使用语音输入，处理工具审批和提问；支持聊天界面与网页模式。
 - **插件界面**：使用适配 DSH Go 的原生工具卡、表单和面板；仓库提供 SDK、教程和示例。
 - **手机操控**：在你开启权限后，让本机引擎读取屏幕、点按和输入，并可随时停止。
@@ -354,7 +354,7 @@ Phase 相关代码经作者许可使用。DeepSeek Harness、PiPilot、DS Bot、
 
 DSH Go 的名称、标识、Deepy 小鲸鱼和鲸娘等形象不在 AGPL 授权范围内，使用条款见 [ASSETS.md](ASSETS.md)。
 
-<sub>远程连接参考了 [ds-harness-remote](https://github.com/liguobao/ds-harness-remote) 的项目和服务器，感谢作者李国宝。</sub>
+<sub>远程连接适配 [gaolin89898/ds-harness-remote](https://github.com/gaolin89898/ds-harness-remote)，原项目为李国宝的 [ds-harness-remote](https://github.com/liguobao/ds-harness-remote)，保留原作者署名与 MIT 许可。</sub>
 
 <br>
 

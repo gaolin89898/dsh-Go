@@ -1,4 +1,4 @@
-/// Pure-Dart client for ds-harness-remote (https://github.com/liguobao/ds-harness-remote,
+/// Pure-Dart client for ds-harness-remote (https://github.com/gaolin89898/ds-harness-remote,
 /// MIT): reach a remote Host's DSH Harness API through the Server Relay, or
 /// directly over WebRTC, with end-to-end Noise IK encryption, using the same
 /// `DshClient` API as the local engine.

@@ -1,3 +1,5 @@
+import 'package:dsh_remote/dsh_remote.dart' show defaultRemoteServerOrigin;
+
 import '../l10n/l10n.dart';
 
 /// Build-time app metadata.
@@ -38,10 +40,10 @@ abstract final class AppInfo {
   static const authorGithubUrl = 'https://github.com/ccch1mneyyy';
 
   static const deepseekPlatform = 'https://platform.deepseek.com/api_keys';
-  static const remoteConsole = 'https://dsh.r2049.cn/app';
+  static const remoteServer = defaultRemoteServerOrigin;
+  static const remoteConsole = '$remoteServer/app';
 
-  /// DSH Remote's upstream, credited under the DSH Remote card as its GitHub
-  /// handle and name.
-  static const remoteProject = 'liguobao/ds-harness-remote';
+  /// The DSH Remote fork used by this app.
+  static const remoteProject = 'gaolin89898/ds-harness-remote';
   static const remoteProjectUrl = 'https://github.com/$remoteProject';
 }

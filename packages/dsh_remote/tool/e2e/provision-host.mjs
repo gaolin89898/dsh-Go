@@ -30,9 +30,10 @@ const tokens = await call('/api/v1/devices/register', {
 }, login.token)
 
 const scope = createHash('sha256').update(origin).digest('hex').slice(0, 24)
-const dir = join(dshHome, 'remote', 'servers', scope, 'host')
+const root = join(dshHome, 'ds-harness-remote')
+const dir = join(root, 'servers', scope, 'host')
 mkdirSync(dir, { recursive: true, mode: 0o700 })
-for (const d of [join(dshHome, 'remote'), join(dshHome, 'remote', 'servers'), join(dshHome, 'remote', 'servers', scope), dir]) chmodSync(d, 0o700)
+for (const d of [root, join(root, 'servers'), join(root, 'servers', scope), dir]) chmodSync(d, 0o700)
 const write = (name, text) => { writeFileSync(join(dir, name), text, { mode: 0o600 }); chmodSync(join(dir, name), 0o600) }
 write('device.json', `${JSON.stringify({ schemaVersion: 1, deviceId, name: deviceName, publicKey: jwk.x }, null, 2)}\n`)
 write('device.key', `${jwk.d}\n`)

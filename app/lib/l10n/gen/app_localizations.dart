@@ -26405,7 +26405,7 @@ abstract class L10n {
   /// No description provided for @remoteSelfHostedSignInHelp.
   ///
   /// In zh, this message translates to:
-  /// **'用邮箱和密码登录自己部署的 liguobao/ds-harness-remote'**
+  /// **'用服务器账号的邮箱和密码登录'**
   String get remoteSelfHostedSignInHelp;
 
   /// No description provided for @remoteServerAddress.
@@ -26429,7 +26429,7 @@ abstract class L10n {
   /// No description provided for @remoteRestoreServer.
   ///
   /// In zh, this message translates to:
-  /// **'改回默认服务器 dsh.r2049.cn'**
+  /// **'改回默认服务器 remote.gaolin.ink'**
   String get remoteRestoreServer;
 
   /// No description provided for @remoteConsole.
@@ -26483,7 +26483,7 @@ abstract class L10n {
   /// No description provided for @remoteWebConsoleProvider.
   ///
   /// In zh, this message translates to:
-  /// **'dsh.r2049.cn · 第三方页面'**
+  /// **'remote.gaolin.ink'**
   String get remoteWebConsoleProvider;
 
   /// No description provided for @remoteActiveHost.
@@ -27416,7 +27416,7 @@ abstract class L10n {
   /// **'还没装 DSH？在主机上运行 {command}'**
   String remoteSshInstallCommand(String command);
 
-  /// Under the DSH Remote card; project is the upstream GitHub project (liguobao/ds-harness-remote), drawn as a link.
+  /// Under the DSH Remote card; project is the configured GitHub fork (gaolin89898/ds-harness-remote), drawn as a link.
   ///
   /// In zh, this message translates to:
   /// **'服务由 {project} 提供'**
@@ -27643,6 +27643,102 @@ abstract class L10n {
   /// In zh, this message translates to:
   /// **'精简 简洁 历史 工具 传输 流量 远程 compact slim lite'**
   String get searchKwRemoteCompactHistory;
+
+  /// No description provided for @phoneRemoteHostTitle.
+  ///
+  /// In zh, this message translates to:
+  /// **'远程访问'**
+  String get phoneRemoteHostTitle;
+
+  /// No description provided for @phoneRemoteHostAllow.
+  ///
+  /// In zh, this message translates to:
+  /// **'允许远程连接此手机'**
+  String get phoneRemoteHostAllow;
+
+  /// No description provided for @phoneRemoteHostName.
+  ///
+  /// In zh, this message translates to:
+  /// **'设备名称'**
+  String get phoneRemoteHostName;
+
+  /// No description provided for @phoneRemoteHostEnable.
+  ///
+  /// In zh, this message translates to:
+  /// **'启用'**
+  String get phoneRemoteHostEnable;
+
+  /// No description provided for @phoneRemoteHostOff.
+  ///
+  /// In zh, this message translates to:
+  /// **'未启用'**
+  String get phoneRemoteHostOff;
+
+  /// No description provided for @phoneRemoteHostWorking.
+  ///
+  /// In zh, this message translates to:
+  /// **'正在配置…'**
+  String get phoneRemoteHostWorking;
+
+  /// No description provided for @phoneRemoteHostChecking.
+  ///
+  /// In zh, this message translates to:
+  /// **'正在检查本机引擎…'**
+  String get phoneRemoteHostChecking;
+
+  /// No description provided for @phoneRemoteHostEngineOff.
+  ///
+  /// In zh, this message translates to:
+  /// **'请先启动本机引擎'**
+  String get phoneRemoteHostEngineOff;
+
+  /// No description provided for @phoneRemoteHostSafeMode.
+  ///
+  /// In zh, this message translates to:
+  /// **'安全模式下不可用'**
+  String get phoneRemoteHostSafeMode;
+
+  /// No description provided for @phoneRemoteHostSignInRequired.
+  ///
+  /// In zh, this message translates to:
+  /// **'登录后此手机才能被连接'**
+  String get phoneRemoteHostSignInRequired;
+
+  /// No description provided for @phoneRemoteHostOnline.
+  ///
+  /// In zh, this message translates to:
+  /// **'在线 · {name}'**
+  String phoneRemoteHostOnline(String name);
+
+  /// No description provided for @phoneRemoteHostOffline.
+  ///
+  /// In zh, this message translates to:
+  /// **'未连接到服务器'**
+  String get phoneRemoteHostOffline;
+
+  /// No description provided for @phoneRemoteHostRequired.
+  ///
+  /// In zh, this message translates to:
+  /// **'填写服务器地址、设备名称、邮箱和密码'**
+  String get phoneRemoteHostRequired;
+
+  /// No description provided for @phoneRemoteHostFailed.
+  ///
+  /// In zh, this message translates to:
+  /// **'没能完成操作，请检查网络和本机插件后重试'**
+  String get phoneRemoteHostFailed;
+
+  /// No description provided for @phoneRemoteHostConfigFailed.
+  ///
+  /// In zh, this message translates to:
+  /// **'没能确认插件配置，请检查是否被配置文件覆盖'**
+  String get phoneRemoteHostConfigFailed;
+
+  /// No description provided for @phoneRemoteHostRestartRequired.
+  ///
+  /// In zh, this message translates to:
+  /// **'插件改动需要重启引擎；重启会中断当前任务。启动完成后请重新登录。'**
+  String get phoneRemoteHostRestartRequired;
 
   /// No description provided for @remotePairEntry.
   ///

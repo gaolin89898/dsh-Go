@@ -14475,7 +14475,7 @@ class L10nZh extends L10n {
   String get remoteSelfHostedServer => '自建服务器';
 
   @override
-  String get remoteSelfHostedSignInHelp => '用邮箱和密码登录自己部署的 liguobao/ds-harness-remote';
+  String get remoteSelfHostedSignInHelp => '用服务器账号的邮箱和密码登录';
 
   @override
   String get remoteServerAddress => '服务器地址';
@@ -14487,7 +14487,7 @@ class L10nZh extends L10n {
   String get remotePassword => '密码';
 
   @override
-  String get remoteRestoreServer => '改回默认服务器 dsh.r2049.cn';
+  String get remoteRestoreServer => '改回默认服务器 remote.gaolin.ink';
 
   @override
   String get remoteConsole => '远程控制台';
@@ -14514,7 +14514,7 @@ class L10nZh extends L10n {
   String get remoteWebConsole => '网页版远程控制台';
 
   @override
-  String get remoteWebConsoleProvider => 'dsh.r2049.cn · 第三方页面';
+  String get remoteWebConsoleProvider => 'remote.gaolin.ink';
 
   @override
   String remoteActiveHost(String name) {
@@ -15162,6 +15162,56 @@ class L10nZh extends L10n {
 
   @override
   String get searchKwRemoteCompactHistory => '精简 简洁 历史 工具 传输 流量 远程 compact slim lite';
+
+  @override
+  String get phoneRemoteHostTitle => '远程访问';
+
+  @override
+  String get phoneRemoteHostAllow => '允许远程连接此手机';
+
+  @override
+  String get phoneRemoteHostName => '设备名称';
+
+  @override
+  String get phoneRemoteHostEnable => '启用';
+
+  @override
+  String get phoneRemoteHostOff => '未启用';
+
+  @override
+  String get phoneRemoteHostWorking => '正在配置…';
+
+  @override
+  String get phoneRemoteHostChecking => '正在检查本机引擎…';
+
+  @override
+  String get phoneRemoteHostEngineOff => '请先启动本机引擎';
+
+  @override
+  String get phoneRemoteHostSafeMode => '安全模式下不可用';
+
+  @override
+  String get phoneRemoteHostSignInRequired => '登录后此手机才能被连接';
+
+  @override
+  String phoneRemoteHostOnline(String name) {
+    return '在线 · $name';
+  }
+
+  @override
+  String get phoneRemoteHostOffline => '未连接到服务器';
+
+  @override
+  String get phoneRemoteHostRequired => '填写服务器地址、设备名称、邮箱和密码';
+
+  @override
+  String get phoneRemoteHostFailed => '没能完成操作，请检查网络和本机插件后重试';
+
+  @override
+  String get phoneRemoteHostConfigFailed => '没能确认插件配置，请检查是否被配置文件覆盖';
+
+  @override
+  String get phoneRemoteHostRestartRequired => '插件改动需要重启引擎；重启会中断当前任务。启动完成后请重新登录。';
 
   @override
   String get remotePairEntry => '扫码配对电脑';

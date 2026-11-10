@@ -17,7 +17,7 @@ import '../../state/star_prompt.dart' show starLinkOpenerProvider;
 import '../settings/settings_widgets.dart';
 import '../theme/app_icons.dart';
 
-/// 「服务由 liguobao/ds-harness-remote 提供」. Only the project name and its
+/// 「服务由 gaolin89898/ds-harness-remote 提供」. Only the project name and its
 /// glyph open the project page, in the browser app as 给项目点 Star does
 /// (signed in to GitHub there, a star is one tap away).
 /// They take taps up to 48dp tall by reaching into the empty space above and

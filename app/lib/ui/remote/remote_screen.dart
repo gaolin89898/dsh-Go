@@ -31,7 +31,7 @@ import 'ssh_host_form.dart';
 
 /// 远程主机 (a list page): the computers and servers this phone can drive.
 ///
-/// Two ways in, side by side: a DSH Remote account (李国宝's ds-harness-remote,
+/// Two ways in, side by side: a DSH Remote account (gaolin89898/ds-harness-remote,
 /// end-to-end encrypted relay, no network setup) and SSH hosts (self-contained:
 /// dsh-app starts `dsh web` over SSH and tunnels to it). Picking a host makes
 /// it the active one; the chat and the session list follow. The old Remote
@@ -46,7 +46,7 @@ class RemoteScreen extends ConsumerWidget {
         builder: (_) => WebViewPage(
           url: Uri.parse(AppInfo.remoteConsole),
           title: l10n.remoteConsole,
-          subtitle: 'dsh.r2049.cn',
+          subtitle: Uri.parse(AppInfo.remoteServer).host,
           allowOpenExternal: true,
           // Android suspends the page in the background and its connection drops.
           reloadAfterBackground: const Duration(seconds: 60),
@@ -224,7 +224,11 @@ class _ActiveCard extends ConsumerWidget {
                     ? (
                         l10n.remoteSignInAgain,
                         () async {
-                          await ref.read(relayAccountProvider.notifier).login();
+                          if ((ref.read(relayServerProvider) ?? defaultRelayServer) == defaultRelayServer) {
+                            await showSelfHostedLogin(context);
+                          } else {
+                            await ref.read(relayAccountProvider.notifier).login();
+                          }
                           if (context.mounted && (ref.read(relayAccountProvider).value?.signedIn ?? false)) reconnect();
                         },
                       )
@@ -397,7 +401,7 @@ class _RelaySection extends ConsumerWidget {
         // The credit's link takes taps in the margin below it, so it carries it.
         margin: available ? RelayCredit.sectionMargin : kSettingsGroupMargin,
         footer: available
-            ? RelayCredit(server: server.isEmpty || server == 'dsh.r2049.cn' ? null : server)
+            ? RelayCredit(server: server.isEmpty || server == Uri.parse(defaultRelayServer).host ? null : server)
             : Text(l10n.remoteUnavailable),
         children: [_LoginCard(account: account, available: available, loading: async.isLoading && !async.hasValue)],
       );
@@ -508,6 +512,8 @@ class _LoginCard extends ConsumerWidget {
     final theme = Theme.of(context);
     final colors = DshColors.of(context);
     final notifier = ref.read(relayAccountProvider.notifier);
+    final passwordSignIn =
+        account.providers.isEmpty && (ref.watch(relayServerProvider) ?? defaultRelayServer) == defaultRelayServer;
     return Padding(
       padding: const EdgeInsets.fromLTRB(SettingsMetrics.inset, 12, SettingsMetrics.inset, 12),
       child: Column(
@@ -550,6 +556,12 @@ class _LoginCard extends ConsumerWidget {
           ],
           if (account.loggingIn)
             _Waiting(url: account.loginUrl, onCancel: notifier.cancelLogin)
+          else if (passwordSignIn)
+            FilledButton.icon(
+              onPressed: available && !loading ? () => showSelfHostedLogin(context) : null,
+              icon: const Icon(AppIcons.account, size: 18),
+              label: Text(available ? l10n.commonSignIn : l10n.remoteComingSoon),
+            )
           else if (account.providers.isEmpty)
             // No provider list (a Server too old to list them, or unreachable):
             // one generic browser sign-in.
@@ -564,7 +576,7 @@ class _LoginCard extends ConsumerWidget {
             const SizedBox(height: 10),
             Text(e, style: theme.textTheme.bodySmall?.copyWith(color: colors.danger)),
           ],
-          if (available)
+          if (available && !passwordSignIn)
             Padding(
               padding: const EdgeInsets.only(top: 4),
               child: Center(

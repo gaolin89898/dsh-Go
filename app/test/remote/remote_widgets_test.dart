@@ -9,6 +9,7 @@ import 'package:dsh_app/runtime/runtime_state.dart';
 import 'package:dsh_app/state/connection_state.dart';
 import 'package:dsh_app/state/hosts_state.dart';
 import 'package:dsh_app/ui/remote/host_switcher.dart';
+import 'package:dsh_app/ui/remote/relay_login_sheet.dart';
 import 'package:dsh_app/ui/remote/remote_screen.dart';
 import 'package:dsh_app/ui/remote/ssh_host_form.dart';
 import 'package:dsh_app/ui/theme/theme.dart';
@@ -123,6 +124,49 @@ void main() {
     expect(find.text('没能获取主机列表 · 轻点重试'), findsOneWidget);
     expect(find.text('还没有主机'), findsNothing);
     expect(find.textContaining('raw server'), findsNothing);
+  });
+
+  for (final savedServer in [null, defaultRelayServer]) {
+    testWidgets('default fork signs in with password (saved server: $savedServer)', (tester) async {
+      relay.user = null;
+      relay.providers = [];
+      SharedPreferences.setMockInitialValues({
+        RelayServerController.prefsKey: ?savedServer,
+      });
+      final c = await pump(tester, const RemoteScreen());
+      await frames(tester, 3);
+      expect(find.text('在浏览器中登录'), findsNothing);
+      await tester.tap(find.widgetWithText(FilledButton, '登录'));
+      await frames(tester);
+      final sheet = find.byType(SelfHostedLoginSheet);
+      final fields = find.descendant(of: sheet, matching: find.byType(TextField));
+      expect(tester.widget<TextField>(fields.at(0)).controller!.text, 'https://remote.gaolin.ink');
+      await tester.enterText(fields.at(1), 'me@example.com');
+      await tester.enterText(fields.at(2), 'pw');
+      await tester.tap(find.descendant(of: sheet, matching: find.widgetWithText(FilledButton, '登录')));
+      await frames(tester);
+      expect(relay.passwordLogins, [('me@example.com', 'pw')]);
+      expect(relay.loginProviderIds, isEmpty);
+      expect(c.read(relayServerProvider), isNull);
+      expect(c.read(relayAccountProvider).value?.signedIn, isTrue);
+      expect(sheet, findsNothing);
+    });
+  }
+
+  testWidgets('expired default fork login reopens the password form', (tester) async {
+    relay.user = null;
+    relay.providers = [];
+    linkStatus = const HostLinkStatus(
+      HostLinkPhase.failed,
+      error: HostLinkError(HostLinkErrorKind.notLoggedIn, '登录已失效'),
+    );
+    SharedPreferences.setMockInitialValues({ActiveHostController.prefsKey: const HostRef.relay('mac').encode()});
+    await pump(tester, const RemoteScreen());
+    await frames(tester, 3);
+    await tester.tap(find.text('重新登录'));
+    await frames(tester);
+    expect(find.byType(SelfHostedLoginSheet), findsOneWidget);
+    expect(relay.loginProviderIds, isEmpty);
   });
 
   testWidgets('remote rows announce selection and align their status right edges', (tester) async {

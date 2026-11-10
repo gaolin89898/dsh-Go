@@ -91,7 +91,7 @@ void main() {
   goldenBoth(
     'remote_signed_out',
     () => const RemoteScreen(),
-    overrides: () => _remote(hosts: const [], active: HostRef.local, relay: FakeRelayBackend()),
+    overrides: () => _remote(hosts: const [], active: HostRef.local, relay: FakeRelayBackend()..providers = []),
   );
 
   // Relay turned off: "即将接入".

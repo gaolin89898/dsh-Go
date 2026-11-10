@@ -174,7 +174,7 @@
 DSH Go combines a chat interface, an on-device runtime and remote connections. It is a third-party project built on [DeepSeek Harness](https://github.com/deepseek-ai/deepseek-harness). The DSH engine runs on your phone; model requests are still handled by the model provider you configure.
 
 - **On-device runtime:** install Ubuntu, Node.js and DSH from the app without Root or a separate Termux installation.
-- **Remote connections:** use DSH on a computer or server through SSH or [DSHarness Remote](https://github.com/liguobao/ds-harness-remote), developed by Li Guobao (liguobao).
+- **Remote connections:** use DSH on a computer or server through SSH or [DSHarness Remote (gaolin89898 fork)](https://github.com/gaolin89898/ds-harness-remote). The default service is `https://remote.gaolin.ink`.
 - **Chat and tools:** switch models, send images, use voice input, and respond to tool approvals and questions. Chat and web interfaces are available.
 - **Plugin interfaces:** use native tool cards, forms and panels from plugins adapted for DSH Go. This repository includes an SDK, guides and examples.
 - **Phone control:** after you enable the required permissions, let the local engine read the screen, tap and type. You can stop it at any time.
@@ -354,7 +354,7 @@ Code derived from Phase is used with the author's permission. DeepSeek Harness, 
 
 The DSH Go name, logo and mascots (Deepy and Whale girl) are not covered by the AGPL; see [ASSETS.md](ASSETS.md) for their terms.
 
-<sub>Remote connections draw on the [ds-harness-remote](https://github.com/liguobao/ds-harness-remote) project and its server. Thanks to its author, liguobao.</sub>
+<sub>Remote connections target [gaolin89898/ds-harness-remote](https://github.com/gaolin89898/ds-harness-remote), forked from Li Guobao's [ds-harness-remote](https://github.com/liguobao/ds-harness-remote). Original attribution and the MIT license are retained.</sub>
 
 <br>
 

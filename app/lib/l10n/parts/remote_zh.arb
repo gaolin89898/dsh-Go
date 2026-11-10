@@ -568,11 +568,11 @@
   "remoteRelayLoginRequired": "填写服务器地址、邮箱和密码",
   "remoteErrSignIn": "没能登录",
   "remoteSelfHostedServer": "自建服务器",
-  "remoteSelfHostedSignInHelp": "用邮箱和密码登录自己部署的 liguobao/ds-harness-remote",
+  "remoteSelfHostedSignInHelp": "用服务器账号的邮箱和密码登录",
   "remoteServerAddress": "服务器地址",
   "remoteEmail": "邮箱",
   "remotePassword": "密码",
-  "remoteRestoreServer": "改回默认服务器 dsh.r2049.cn",
+  "remoteRestoreServer": "改回默认服务器 remote.gaolin.ink",
   "remoteConsole": "远程控制台",
   "remoteHostsIntro": "在手机上接着用电脑或服务器上的 DSH",
   "remoteSshHosts": "SSH 主机",
@@ -581,7 +581,7 @@
   "remoteSshDirect": "不经过第三方服务器",
   "remoteOtherMethods": "其他方式",
   "remoteWebConsole": "网页版远程控制台",
-  "remoteWebConsoleProvider": "dsh.r2049.cn · 第三方页面",
+  "remoteWebConsoleProvider": "remote.gaolin.ink",
   "remoteActiveHost": "正在使用「{name}」",
   "@remoteActiveHost": {
     "placeholders": {
@@ -965,7 +965,7 @@
   },
   "remoteRelayProvider": "服务由 {project} 提供",
   "@remoteRelayProvider": {
-    "description": "Under the DSH Remote card; project is the upstream GitHub project (liguobao/ds-harness-remote), drawn as a link.",
+    "description": "Under the DSH Remote card; project is the configured GitHub fork (gaolin89898/ds-harness-remote), drawn as a link.",
     "placeholders": {
       "project": {
         "type": "String"
@@ -1042,5 +1042,22 @@
   "remoteCompactHistory": "精简历史",
   "remoteErrHistoryModeChanged": "主机已不支持精简历史，请切换到其他主机后再连回来，或重启 App，重新加载历史",
   "remoteCompactHistoryHint": "支持的 DSH Remote 主机会精简历史工具详情，实时回复和审批不变。切换主机或重启 App 后生效；旧主机仍传输完整历史。",
-  "searchKwRemoteCompactHistory": "精简 简洁 历史 工具 传输 流量 远程 compact slim lite"
+  "searchKwRemoteCompactHistory": "精简 简洁 历史 工具 传输 流量 远程 compact slim lite",
+  "phoneRemoteHostTitle": "远程访问",
+  "phoneRemoteHostAllow": "允许远程连接此手机",
+  "phoneRemoteHostName": "设备名称",
+  "phoneRemoteHostEnable": "启用",
+  "phoneRemoteHostOff": "未启用",
+  "phoneRemoteHostWorking": "正在配置…",
+  "phoneRemoteHostChecking": "正在检查本机引擎…",
+  "phoneRemoteHostEngineOff": "请先启动本机引擎",
+  "phoneRemoteHostSafeMode": "安全模式下不可用",
+  "phoneRemoteHostSignInRequired": "登录后此手机才能被连接",
+  "phoneRemoteHostOnline": "在线 · {name}",
+  "@phoneRemoteHostOnline": { "placeholders": { "name": { "type": "String" } } },
+  "phoneRemoteHostOffline": "未连接到服务器",
+  "phoneRemoteHostRequired": "填写服务器地址、设备名称、邮箱和密码",
+  "phoneRemoteHostFailed": "没能完成操作，请检查网络和本机插件后重试",
+  "phoneRemoteHostConfigFailed": "没能确认插件配置，请检查是否被配置文件覆盖",
+  "phoneRemoteHostRestartRequired": "插件改动需要重启引擎；重启会中断当前任务。启动完成后请重新登录。"
 }

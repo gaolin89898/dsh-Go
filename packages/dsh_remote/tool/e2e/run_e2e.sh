@@ -1,39 +1,37 @@
 #!/usr/bin/env bash
-# End-to-end check of dsh_remote against the real upstream stack, fully
+# End-to-end check of dsh_remote against the pinned gaolin89898 fork, fully
 # isolated in a temp dir (own DSH_HOME, loopback only):
 #
 #   ds-harness-remote apps/server (self-hosted, password login, Relay only)
-#     <- Host: `dsh web` + ds-harness-remote@$PLUGIN_VERSION plugin from npm
+#     <- Host: `dsh web` + the plugin from the same Git revision
 #     <- Client: test/live_remote_test.dart (this package), no model prompts
 #
 # Usage: tool/e2e/run_e2e.sh [--keep]
-# Env:   UPSTREAM   ds-harness-remote checkout (default ../../.refs/ds-harness-remote-upstream)
+# Env:   UPSTREAM   optional ds-harness-remote checkout (otherwise clone the pinned fork)
 #        DSH_BIN    dsh launcher for the Host (default: dsh on PATH)
-#        PLUGIN_VERSION (default 0.5.23)
-#        PLUGIN_SPEC  anything `dsh plugin add` accepts, e.g. a packed upstream
-#                     tarball (default ds-harness-remote@$PLUGIN_VERSION)
+#        PLUGIN_SPEC  anything `dsh plugin add` accepts (default: pinned fork Git URL)
 #        RELAY_ATTACH=1  mount tool/e2e/relay-node.ts on the Server so it offers
 #                     `transport.relay.attach` (the open-source Server has no
 #                     Relay node); needs Host plugin >= 0.6.0, and the run fails
 #                     unless both sides attached and frames crossed the node
 #        RELAY_CLIENT_HOST=10.0.2.2  advertise an emulator-reachable Relay node to clients
-#        WEBRTC=1     let the Server negotiate LAN / P2P / TURN and forward
-#                     WebRTC signaling like the hosted one (tool/e2e/patch-webrtc.mjs;
-#                     no STUN / TURN servers). The Dart test has no WebRTC stack
+#        WEBRTC=1     use the fork Server's native WebRTC signaling.
+#                     The Dart test has no WebRTC stack
 #                     and stays on the Relay; pair it with SERVE=1 for a client
 #                     that has one (tool/e2e/p2p_emulator.sh)
 #        SERVE=1      skip the Dart test: write SERVER_URL / ACCOUNT / PASSWORD to
 #                     $WORK/serve.env and keep the stack up until $WORK/stop exists
 #        PLUGIN_OPTIONAL=1  install the plugin's optional dependencies too
 #                     (@roamhq/wrtc, the Host's native WebRTC; without it werift)
-# Needs: node >= 22, npm, network access to the npm registry, dart.
+# Needs: node >= 24.9, npm, Git, network access to GitHub/npm, dart.
 set -euo pipefail
 
 PKG="$(cd "$(dirname "$0")/../.." && pwd)"
-UPSTREAM="${UPSTREAM:-$PKG/../../.refs/ds-harness-remote-upstream}"
+UPSTREAM="${UPSTREAM:-}"
+REMOTE_REPOSITORY="https://github.com/gaolin89898/ds-harness-remote.git"
+REMOTE_REVISION="51eed7e1cfb73d3482a04c25cd8e13a00b52a7a1"
 DSH_BIN="${DSH_BIN:-dsh}"
-PLUGIN_VERSION="${PLUGIN_VERSION:-0.5.23}"
-PLUGIN_SPEC="${PLUGIN_SPEC:-ds-harness-remote@$PLUGIN_VERSION}"
+PLUGIN_SPEC="${PLUGIN_SPEC:-git+$REMOTE_REPOSITORY#$REMOTE_REVISION}"
 RELAY_ATTACH="${RELAY_ATTACH:-0}"
 WEBRTC="${WEBRTC:-0}"
 SERVE="${SERVE:-0}"
@@ -60,6 +58,11 @@ wait_for() { # file pattern seconds
 }
 
 # 1. Self-hosted Server, bundled from the upstream sources.
+if [[ -z "$UPSTREAM" ]]; then
+  UPSTREAM="$WORK/source"
+  git clone --quiet --no-checkout "$REMOTE_REPOSITORY" "$UPSTREAM"
+  git -C "$UPSTREAM" checkout --quiet --detach "$REMOTE_REVISION"
+fi
 log "building self-hosted Server from $UPSTREAM"
 mkdir -p "$WORK/server/src/server" "$WORK/server/src/protocol" "$WORK/home" "$WORK/dsh-home" "$WORK/work"
 cp "$UPSTREAM"/apps/server/src/*.ts "$WORK/server/src/server/"
@@ -70,8 +73,7 @@ if [[ "$RELAY_ATTACH" == 1 ]]; then
   node "$PKG/tool/e2e/patch-relay-attach.mjs" "$WORK/server/src/server" "ws://127.0.0.1:$PORT/ws/v1/relay"
 fi
 if [[ "$WEBRTC" == 1 ]]; then
-  log "turning on WebRTC signaling (transport.lan/p2p/turn)"
-  node "$PKG/tool/e2e/patch-webrtc.mjs" "$WORK/server/src/server"
+  log "using the fork Server's native WebRTC signaling"
 fi
 echo '{"name":"e2e-server","private":true,"type":"module"}' > "$WORK/server/package.json"
 (cd "$WORK/server" && npm_config_cache="$WORK/npm-cache" npm install --silent --no-audit --no-fund \

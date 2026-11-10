@@ -24,6 +24,17 @@ You can add DSH to this phone anytime: tap **Install runtime** on the engine pag
 - **Logs**: the engine's live output.
 - **Background running** and **Diagnostics**: see [FAQ](11-faq.md).
 
+## Allow remote connections to this phone
+
+<!-- nav: commonSettings,hubSettingsEngine,phoneRemoteHostAllow -->
+`Settings › Local engine › Allow remote access to this phone`
+
+Install the runtime on the spare phone and start its local engine. Open **Allow remote access to this phone**. On first use, enter a device name and your server account email and password. The default server is `https://remote.gaolin.ink`. Tap **Enable** to install and configure your Remote plugin and register this phone as a host.
+
+Once it shows online, sign in to the same server account on another phone's **Remote host** page or the browser [Remote console](https://remote.gaolin.ink/app), then select this phone to continue its chats. Check the host fingerprint when connecting for the first time. Chats and workspaces stay on the spare phone.
+
+Keep the spare phone's engine running; see [FAQ](11-faq.md) for background settings. Safe mode does not load the plugin. Turning the switch off disables the Remote plugin and keeps its installation, chats and workspaces. If a restart is required, the change takes effect after restarting, which interrupts current tasks.
+
 ## Updates and installed tools
 
 Normal engine updates replace only app-managed engine components, without rebuilding your Linux system. Apt tools such as gh, npm global packages in their default location, Python/pip packages, settings and workspaces stay. Bundled DSH, Node, pnpm, the bridge and their dedicated directories remain app-managed; do not install your own software there. A Node version change may still require rebuilding third-party native extensions: preserving files does not guarantee extension compatibility.
@@ -84,8 +95,8 @@ Testing starts DSH on the host, and it keeps running afterwards. To change or de
 
 No network setup, end-to-end encrypted. Good for computers on another network.
 
-1. Install the remote plugin in the host's DSH and sign in.
-2. On the remote hosts page, choose the same sign-in provider you used on that host, for example “Continue with GitHub”, and sign in with the same account. If the page lists no providers and shows only **Sign in in browser**, tap that button.
+1. Install [gaolin89898/ds-harness-remote](https://github.com/gaolin89898/ds-harness-remote) in the host's DSH, set its Server address to `https://remote.gaolin.ink`, and sign in.
+2. On the phone's remote hosts page, tap **Sign in** and use the same server account email and password. The default address is prefilled; you can also enter your own server address in the form. Each server has a separate sign-in, identity and credentials. Browser sign-in remains available when offered by another server.
 3. Select an online host. On first connection, check that the identity fingerprint matches the one the host's remote plugin shows, then tap **Trust and connect**.
 
 When the server supports it, you can also choose **Pair a computer by scanning**: sign in to DeepSeek in the app, scan the code shown by the computer’s Remote plugin, check the computer fingerprint, then enter the verification code as prompted. Camera permission is only for capturing the QR code; reading an image from photos or pasting the pairing link still works without it. Opening the scanner initializes the shared ML Kit SDK on demand, without requiring or enabling phone control’s text recognition. See the [FAQ](11-faq.md#local-text-recognition-and-google-ml-kit) for SDK statistics disclosures.

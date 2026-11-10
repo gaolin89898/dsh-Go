@@ -89,7 +89,7 @@ class DshRemoteRelayBackend implements RelayBackend, RelayNetworkBackend, RelayP
   /// pins only a key whose fingerprint is exactly the one they saw.
   final Map<String, String> _approved = {};
 
-  /// The server's origin (`https://dsh.r2049.cn`), or a [HostLinkError] for
+  /// The server's origin (`https://remote.gaolin.ink`), or a [HostLinkError] for
   /// something that isn't one (self-hosted servers: HTTPS, or HTTP on a
   /// private address).
   static String normalizeServer(String input) {

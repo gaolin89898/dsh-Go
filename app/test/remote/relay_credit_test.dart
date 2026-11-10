@@ -1,5 +1,5 @@
 // The credit under the DSH Remote card: only the project name opens
-// github.com/liguobao/ds-harness-remote; its tap area reaches 48dp tall into
+// github.com/gaolin89898/ds-harness-remote; its tap area reaches 48dp tall into
 // the empty space around the line and stays clear of every control near it.
 
 import 'package:dsh_app/remote/relay/relay_backend.dart';
@@ -22,7 +22,7 @@ import '../shell/golden_harness.dart';
 import '../support/english_preview.dart';
 import 'support/fake_relay.dart';
 
-const _project = 'https://github.com/liguobao/ds-harness-remote';
+const _project = 'https://github.com/gaolin89898/ds-harness-remote';
 
 class _SelfHostedRelay extends FakeRelayBackend {
   @override
@@ -109,7 +109,7 @@ void main() {
       .any(
         (e) => switch (e.target) {
           TextSpan(:final TapGestureRecognizer recognizer, :final String text) =>
-            recognizer.onTap != null && text.startsWith('liguobao/'),
+            recognizer.onTap != null && text.startsWith('gaolin89898/'),
           _ => false,
         },
       );
@@ -131,15 +131,15 @@ void main() {
 
   Finder card(String text) => find.ancestor(of: find.text(text), matching: find.byType(SheetGroup));
 
-  testWidgets('reads 服务由 liguobao/ds-harness-remote 提供', (tester) async {
+  testWidgets('reads 服务由 gaolin89898/ds-harness-remote 提供', (tester) async {
     await pump(tester);
-    expect(creditText(tester), startsWith('服务由 liguobao/ds-harness-remote\u2060\uFFFC 提供'));
+    expect(creditText(tester), startsWith('服务由 gaolin89898/ds-harness-remote\u2060\uFFFC 提供'));
     expect(find.textContaining('李国宝', findRichText: true), findsNothing);
   });
 
   testWidgets('tapping the project name opens its GitHub page', (tester) async {
     await pump(tester);
-    await tester.tapAt(partRect(tester, 'liguobao/ds-harness-remote').center);
+    await tester.tapAt(partRect(tester, 'gaolin89898/ds-harness-remote').center);
     await frames(tester, 2);
     expect(opened, [Uri.parse(_project)]);
 
@@ -155,7 +155,7 @@ void main() {
     await tester.tapAt(partRect(tester, '服务由').center);
     await tester.tapAt(partRect(tester, '提供').center);
     // Just past either end of the link, on its line.
-    final name = partRect(tester, 'liguobao/ds-harness-remote');
+    final name = partRect(tester, 'gaolin89898/ds-harness-remote');
     final glyph = tester.getRect(find.descendant(of: find.byType(RelayCredit), matching: find.byType(Icon)));
     await tester.tapAt(Offset(name.left - 2, name.center.dy));
     await tester.tapAt(Offset(glyph.right + 3, name.center.dy));
@@ -169,7 +169,7 @@ void main() {
   testWidgets('the name takes taps a little above and below its line', (tester) async {
     await pump(tester);
     final line = lineRect(tester);
-    final x = partRect(tester, 'liguobao/ds-harness-remote').center.dx;
+    final x = partRect(tester, 'gaolin89898/ds-harness-remote').center.dx;
     await tester.tapAt(Offset(x, line.top - 7));
     await frames(tester, 2);
     expect(opened, hasLength(1));
@@ -187,7 +187,7 @@ void main() {
     final sshTitle = tester.getRect(find.text('SSH 主机'));
     final sshCard = tester.getRect(card('添加 SSH 主机'));
     final line = lineRect(tester);
-    final name = partRect(tester, 'liguobao/ds-harness-remote');
+    final name = partRect(tester, 'gaolin89898/ds-harness-remote');
     final glyph = tester.getRect(find.descendant(of: find.byType(RelayCredit), matching: find.byType(Icon)));
 
     // Every point from the sign-in button to the SSH card, 1dp apart.
@@ -234,7 +234,7 @@ void main() {
     await pump(tester);
     await tester.tap(find.text('使用 GitHub 登录'));
     await frames(tester, 3);
-    expect(signInPages, [Uri.parse('https://dsh.r2049.cn/qr/scan/abc')]);
+    expect(signInPages, [Uri.parse('https://remote.gaolin.ink/qr/scan/abc')]);
     expect(opened, isEmpty);
     await tester.tap(find.text('取消'));
     await frames(tester, 3);
@@ -249,7 +249,7 @@ void main() {
     addTearDown(() => tester.binding.defaultBinaryMessenger.setMockMethodCallHandler(SystemChannels.platform, null));
     opener = (url) async => false;
     await pump(tester);
-    await tester.tapAt(partRect(tester, 'liguobao/ds-harness-remote').center);
+    await tester.tapAt(partRect(tester, 'gaolin89898/ds-harness-remote').center);
     await frames(tester, 4);
     expect(clipboard, _project);
     expect(find.text('没能打开浏览器，网址已复制'), findsOneWidget);
@@ -263,7 +263,7 @@ void main() {
     addTearDown(() => tester.binding.defaultBinaryMessenger.setMockMethodCallHandler(SystemChannels.platform, null));
     opener = (url) async => throw PlatformException(code: 'ACTIVITY_NOT_FOUND');
     await pump(tester);
-    await tester.tapAt(partRect(tester, 'liguobao/ds-harness-remote').center);
+    await tester.tapAt(partRect(tester, 'gaolin89898/ds-harness-remote').center);
     await frames(tester, 4);
     expect(tester.takeException(), isNull);
     expect(find.text('没能打开浏览器'), findsOneWidget);
@@ -271,27 +271,27 @@ void main() {
 
   testWidgets('a self-hosted server is named after the credit; the link still works', (tester) async {
     await pump(tester, relay: _SelfHostedRelay());
-    expect(creditText(tester), '服务由 liguobao/ds-harness-remote\u2060\uFFFC 提供 · 当前服务器 remote.example.com');
+    expect(creditText(tester), '服务由 gaolin89898/ds-harness-remote\u2060\uFFFC 提供 · 当前服务器 remote.example.com');
     await tester.tapAt(partRect(tester, 'remote.example.com').center);
     await frames(tester, 2);
     expect(opened, isEmpty);
-    await tester.tapAt(partRect(tester, 'liguobao/ds-harness-remote').center);
+    await tester.tapAt(partRect(tester, 'gaolin89898/ds-harness-remote').center);
     await frames(tester, 2);
     expect(opened, [Uri.parse(_project)]);
   });
 
-  testWidgets('English: Service by liguobao/ds-harness-remote', (tester) async {
+  testWidgets('English: Service by gaolin89898/ds-harness-remote', (tester) async {
     useEnglish();
     await pump(tester);
-    expect(creditText(tester), 'Service by liguobao/ds-harness-remote\u2060\uFFFC');
+    expect(creditText(tester), 'Service by gaolin89898/ds-harness-remote\u2060\uFFFC');
     await tester.tapAt(partRect(tester, 'Service').center);
     await frames(tester, 2);
     expect(opened, isEmpty);
-    await tester.tapAt(partRect(tester, 'liguobao/ds-harness-remote').center);
+    await tester.tapAt(partRect(tester, 'gaolin89898/ds-harness-remote').center);
     await frames(tester, 2);
     expect(opened, [Uri.parse(_project)]);
     // The same reach above and below the line.
-    final x = partRect(tester, 'liguobao/ds-harness-remote').center.dx;
+    final x = partRect(tester, 'gaolin89898/ds-harness-remote').center.dx;
     await tester.tapAt(Offset(x, lineRect(tester).top - 7));
     await tester.tapAt(Offset(x, lineRect(tester).bottom + 20));
     await frames(tester, 2);
@@ -301,10 +301,10 @@ void main() {
   testWidgets('the link is announced as a link', (tester) async {
     final semantics = tester.ensureSemantics();
     await pump(tester);
-    final link = find.semantics.byLabel('liguobao/ds-harness-remote').evaluate().single;
+    final link = find.semantics.byLabel('gaolin89898/ds-harness-remote').evaluate().single;
     expect(link.flagsCollection.isLink, isTrue);
     expect(link.getSemanticsData().hasAction(SemanticsAction.tap), isTrue);
-    tester.semantics.tap(find.semantics.byLabel('liguobao/ds-harness-remote'));
+    tester.semantics.tap(find.semantics.byLabel('gaolin89898/ds-harness-remote'));
     await frames(tester, 2);
     expect(opened, [Uri.parse(_project)]);
     semantics.dispose();

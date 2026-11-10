@@ -15196,7 +15196,7 @@ class L10nEn extends L10n {
   String get remoteSelfHostedServer => 'Self-hosted server';
 
   @override
-  String get remoteSelfHostedSignInHelp => 'Sign in to your own liguobao/ds-harness-remote with email and password';
+  String get remoteSelfHostedSignInHelp => 'Sign in with your server account email and password';
 
   @override
   String get remoteServerAddress => 'Server address';
@@ -15208,7 +15208,7 @@ class L10nEn extends L10n {
   String get remotePassword => 'Password';
 
   @override
-  String get remoteRestoreServer => 'Restore default server dsh.r2049.cn';
+  String get remoteRestoreServer => 'Restore default server remote.gaolin.ink';
 
   @override
   String get remoteConsole => 'Remote console';
@@ -15235,7 +15235,7 @@ class L10nEn extends L10n {
   String get remoteWebConsole => 'Web remote console';
 
   @override
-  String get remoteWebConsoleProvider => 'dsh.r2049.cn · Third-party page';
+  String get remoteWebConsoleProvider => 'remote.gaolin.ink';
 
   @override
   String remoteActiveHost(String name) {
@@ -15945,6 +15945,58 @@ class L10nEn extends L10n {
 
   @override
   String get searchKwRemoteCompactHistory => 'compact slim lite history tools transfer bandwidth remote';
+
+  @override
+  String get phoneRemoteHostTitle => 'Remote access';
+
+  @override
+  String get phoneRemoteHostAllow => 'Allow remote access to this phone';
+
+  @override
+  String get phoneRemoteHostName => 'Device name';
+
+  @override
+  String get phoneRemoteHostEnable => 'Enable';
+
+  @override
+  String get phoneRemoteHostOff => 'Off';
+
+  @override
+  String get phoneRemoteHostWorking => 'Setting up…';
+
+  @override
+  String get phoneRemoteHostChecking => 'Checking local engine…';
+
+  @override
+  String get phoneRemoteHostEngineOff => 'Start the local engine to continue';
+
+  @override
+  String get phoneRemoteHostSafeMode => 'Unavailable in safe mode';
+
+  @override
+  String get phoneRemoteHostSignInRequired => 'Sign in to make this phone available';
+
+  @override
+  String phoneRemoteHostOnline(String name) {
+    return 'Online · $name';
+  }
+
+  @override
+  String get phoneRemoteHostOffline => 'Not connected to the server';
+
+  @override
+  String get phoneRemoteHostRequired => 'Enter the server, device name, email and password';
+
+  @override
+  String get phoneRemoteHostFailed => 'Couldn’t complete the change. Check the network and local plugin, then retry.';
+
+  @override
+  String get phoneRemoteHostConfigFailed =>
+      'The plugin configuration could not be confirmed. Check whether a configuration file overrides it.';
+
+  @override
+  String get phoneRemoteHostRestartRequired =>
+      'The plugin change needs an engine restart. Restarting interrupts current tasks. Sign in again after the engine starts.';
 
   @override
   String get remotePairEntry => 'Pair a computer by scanning';

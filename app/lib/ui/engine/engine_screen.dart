@@ -26,6 +26,7 @@ import '../web/local_web_screen.dart';
 import 'engine_status.dart';
 import 'local_uninstall.dart';
 import 'log_view.dart';
+import 'phone_remote_host_settings.dart';
 import 'workspace_recovery_settings.dart';
 
 /// `rN-dsh…-HASH` → `rN · HASH8`; anything else is shown as is.
@@ -140,6 +141,7 @@ class EngineScreen extends ConsumerWidget {
                 const SafeModeSettingsTiles(showAutoSwitch: false, icon: false),
               ],
             ),
+            if (!missing) const PhoneRemoteHostSettings(),
             if (!missing)
               Padding(
                 padding: const EdgeInsets.fromLTRB(16, 0, 16, 24),

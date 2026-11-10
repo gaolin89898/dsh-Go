@@ -9,8 +9,9 @@ import 'dart:io';
 import '../transport/peer_connection.dart' show RemoteIceServer;
 import '../util/bytes.dart';
 
-/// Default hosted Server (李国宝's deployment).
-final Uri defaultRemoteServer = Uri.parse('https://dsh.r2049.cn');
+/// Default Server for gaolin89898/ds-harness-remote.
+const defaultRemoteServerOrigin = 'https://remote.gaolin.ink';
+final Uri defaultRemoteServer = Uri.parse(defaultRemoteServerOrigin);
 
 /// Normalizes a user-entered Server address to an origin without a trailing
 /// slash. HTTPS is required except for loopback / private-network hosts

@@ -29,7 +29,7 @@ class FakeRelayBackend implements RelayBackend {
   final List<String> forgotten = [];
 
   @override
-  String get serverLabel => 'dsh.r2049.cn';
+  String get serverLabel => 'remote.gaolin.ink';
 
   @override
   Future<RelayUser?> currentUser() async => user;
@@ -42,7 +42,7 @@ class FakeRelayBackend implements RelayBackend {
     loginProviderIds.add(providerId);
     final completer = pendingLogin = Completer<RelayUser>();
     return RelayLoginSession(
-      loginUrl: Uri.parse('https://dsh.r2049.cn/qr/scan/abc'),
+      loginUrl: Uri.parse('https://remote.gaolin.ink/qr/scan/abc'),
       completed: completer.future.then((u) => user = u),
       onCancel: () {
         if (!completer.isCompleted) completer.completeError(StateError('cancelled'));

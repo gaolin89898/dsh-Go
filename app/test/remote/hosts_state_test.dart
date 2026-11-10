@@ -412,7 +412,7 @@ void main() {
       expect(c.read(relayBackendProvider), isA<DshRemoteRelayBackend>());
       final state = await c.read(relayAccountProvider.future);
       expect(state.available, isTrue);
-      expect(state.server, 'dsh.r2049.cn');
+      expect(state.server, 'remote.gaolin.ink');
       expect(state.signedIn, isFalse);
     });
 
@@ -437,7 +437,7 @@ void main() {
       final login = c.read(relayAccountProvider.notifier).login(providerId: 'github');
       await until(c, relayAccountProvider, (s) => s.value?.loginUrl != null, what: 'GitHub 登录已打开');
       expect(relay.loginProviderIds, ['github']);
-      expect(opened.single.host, 'dsh.r2049.cn');
+      expect(opened.single.host, 'remote.gaolin.ink');
       relay.pendingLogin!.complete(sampleRelayUser);
       await login;
       expect(c.read(relayAccountProvider).value!.user!.provider, 'github');
@@ -457,7 +457,7 @@ void main() {
       final login = c2.read(relayAccountProvider.notifier).login();
       await until(c2, relayAccountProvider, (s) => s.value?.loginUrl != null, what: '浏览器登录已打开');
       expect(c2.read(relayAccountProvider).value!.loggingIn, isTrue);
-      expect(opened.single.host, 'dsh.r2049.cn');
+      expect(opened.single.host, 'remote.gaolin.ink');
       relay.pendingLogin!.complete(sampleRelayUser);
       await login;
       final state = c2.read(relayAccountProvider).value!;

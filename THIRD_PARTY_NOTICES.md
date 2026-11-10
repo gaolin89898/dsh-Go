@@ -122,6 +122,8 @@ DS Bot 的 NOTICE 原文附在文末。
 | 项 | 内容 |
 |---|---|
 | 项目 | ds-harness-remote，https://github.com/liguobao/ds-harness-remote |
+| 当前适配 fork | https://github.com/gaolin89898/ds-harness-remote，`51eed7e1cfb73d3482a04c25cd8e13a00b52a7a1`（0.6.4） |
+| 默认服务 | https://remote.gaolin.ink；客户端仍为本仓库的 Dart 适配层，不打包 Host 插件或 Server |
 | 版权人 | Copyright (c) 2026 DSH Remote contributors |
 | 许可 | MIT（全文另见 `packages/dsh_remote/LICENSE-ds-harness-remote`） |
 | 用途 | 远程连接：协议、分帧、校验、加密信道、直连（WebRTC）与连接逻辑 |

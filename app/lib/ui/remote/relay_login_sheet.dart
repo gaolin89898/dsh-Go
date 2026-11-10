@@ -7,9 +7,7 @@ import '../common/app_sheet.dart';
 import '../common/sheet_title_bar.dart';
 import '../theme/theme.dart';
 
-/// Advanced: sign in to a self-hosted DSH Remote server (ds-harness-remote
-/// `apps/server`) with email + password. The hosted server keeps using the
-/// browser sign-in.
+/// Sign in to the default or a custom DSH Remote server with email + password.
 Future<void> showSelfHostedLogin(BuildContext context) {
   return showAppSheet<void>(
     context,
@@ -27,7 +25,7 @@ class SelfHostedLoginSheet extends ConsumerStatefulWidget {
 }
 
 class _SelfHostedLoginSheetState extends ConsumerState<SelfHostedLoginSheet> {
-  late final _server = TextEditingController(text: ref.read(relayServerProvider) ?? '');
+  late final _server = TextEditingController(text: ref.read(relayServerProvider) ?? defaultRelayServer);
   final _email = TextEditingController();
   final _password = TextEditingController();
   bool _busy = false;
@@ -82,7 +80,7 @@ class _SelfHostedLoginSheetState extends ConsumerState<SelfHostedLoginSheet> {
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              SheetTitleBar(l10n.remoteSelfHostedServer),
+              SheetTitleBar(custom == null ? l10n.remoteRelaySignInTitle : l10n.remoteSelfHostedServer),
               Padding(
                 padding: const EdgeInsets.fromLTRB(SheetTitleBar.inset, 0, SheetTitleBar.inset, 16),
                 child: Text(

@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:dsh_client/dsh_client.dart';
+import 'package:dsh_remote/dsh_remote.dart' show defaultRemoteServer;
 
 import '../../l10n/l10n.dart';
 import '../link_status.dart';
@@ -116,7 +117,7 @@ abstract class RelayBackend {
   /// False when the relay is turned off ([UnavailableRelayBackend]).
   bool get available;
 
-  /// Server shown in the UI (`dsh.r2049.cn`).
+  /// Server hostname shown in the UI.
   String get serverLabel;
 
   Future<RelayUser?> currentUser();
@@ -179,7 +180,7 @@ class UnavailableRelayBackend implements RelayBackend {
   bool get available => false;
 
   @override
-  String get serverLabel => 'dsh.r2049.cn';
+  String get serverLabel => defaultRemoteServer.host;
 
   @override
   Future<RelayUser?> currentUser() async => null;
@@ -476,7 +477,7 @@ class RelayPairingOffer {
     required this.token,
   });
 
-  /// Origin of the Server the code belongs to (`https://dsh.r2049.cn`).
+  /// Origin of the Server the code belongs to (`https://remote.gaolin.ink`).
   final String server;
 
   /// Untrusted display name from the code / Server.
